@@ -62,7 +62,7 @@ function App() {
           setOpenSnackBar(true);
         }} >
           {/* <Typography sx={{ fontSize: '45px', fontFamily: 'Source Sans Pro, sans-serif', letterSpacing: '6px', fontWeight: '700' }} color='primary' >{hkid}</Typography> */}
-          {hkidList.map((hkid, i) => <Typography key={hkid+i} sx={{ fontSize: '35px', fontFamily: 'Source Sans Pro, sans-serif', letterSpacing: '6px', fontWeight: '700', margin:'0 20px'}} color='primary' >{hkid}</Typography>)}
+          {hkidList.map((hkid, i) => <Typography key={hkid+i} sx={{ fontSize: '35px', fontFamily: 'Source Sans Pro, sans-serif', letterSpacing: '6px', fontWeight: '700', margin:'0 15px'}} color='primary' >{hkid}</Typography>)}
         </Box>
         <Box sx={{ marginTop: '40px'}}>
           <Box><TextField variant='standard'sx={{ input: {fontSize:'40px', textAlign: 'center', color:'white'}, maxWidth: '200px'}} size='small' type='number' color='primary' onChange={e=> setNum(parseInt(e.target.value))} value={num}></TextField></Box>
