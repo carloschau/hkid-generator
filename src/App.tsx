@@ -56,7 +56,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Box sx={{position: 'absolute', top:'1em', right: '1em'}}><Typography color='primary' fontSize={'1.3rem'}>Credit: <Link href='https://pinkylam.me/playground/hkid/'>Ice Lam</Link></Typography></Box>
-      <Container sx={{display:'flex', flexDirection:'column', alignItems:'center'}}>
+      <Container sx={{display:'flex', flexDirection:'column', alignItems:'center', marginTop: '30px' }}>
         <Typography sx={{ fontSize: '1.75rem', width: '360px', margin: '0 80px 30px 80px ', fontWeight: '300', maxWidth: '320px', lineHeight:'1.3'}} color='primary'>Hong Kong Identity Card Number Generator</Typography>
         <Box sx={{cursor: 'pointer', display:'flex', flexWrap: 'wrap'}} onClick={() =>{
           navigator.clipboard.writeText(hkidList.join("\n"));
