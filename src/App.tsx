@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import './App.css'
-import { Box, Button, Container, CssBaseline, Link, Snackbar, TextField, Typography } from '@mui/material'
+import { Box, Button, Container, CssBaseline, Link, ListItem, ListItemText, Snackbar, TextField, Typography } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { generateHkid, generateHkidBatch } from './hkid-utils'
+import { List, RowComponentProps } from 'react-window';
 import SourceSansPro from './assets/font/source-sans-pro-latin-400-normal.woff2';
 import SourceSansProBold from './assets/font/source-sans-pro-latin-600-normal.woff2';
 import GithubMark from './assets/github-mark.svg';
@@ -53,6 +54,17 @@ function App() {
     setOpenSnackBar(false);
   };
 
+  function renderHkidRow({
+    index,
+    hkidList,
+    style
+  }: RowComponentProps<{
+    hkidList: string[];
+}>){
+    return (<Box sx={style}>
+        <Typography key={index}  sx={{ fontSize: '2.188rem', letterSpacing: '6px', fontWeight: '700', margin:'0 15px'}} color='primary' >{hkidList[index]}</Typography>
+      </Box>)}
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -63,11 +75,18 @@ function App() {
       </Box>
       <Container sx={{display:'flex', flexDirection:'column', alignItems:'center', marginTop: '30px' }}>
         <Typography sx={{ fontSize: '1.75rem', width: '360px', margin: '0 80px 30px 80px ', fontWeight: '300', maxWidth: '320px', lineHeight:'1.3'}} color='primary'>Hong Kong Identity Card Number Generator</Typography>
-        <Box sx={{cursor: 'pointer', display:'flex', flexWrap: 'wrap'}} onClick={() =>{
+        <Box sx={{cursor: 'pointer' }} onClick={() =>{
           navigator.clipboard.writeText(hkidList.join("\n"));
           setOpenSnackBar(true);
-        }} >          
-          {hkidList.map((hkid, i) => <Typography key={hkid+i} sx={{ fontSize: '2.188rem', letterSpacing: '6px', fontWeight: '700', margin:'0 15px'}} color='primary' >{hkid}</Typography>)}
+        }} >                    
+          <List 
+            rowCount={hkidList.length} 
+            rowProps={{hkidList}} 
+            overscanCount={5} 
+            rowHeight={60}
+            rowComponent={renderHkidRow}
+            style={{width:'300px', maxHeight:'500px'}}
+          />
         </Box>
         <Box sx={{ marginTop: '40px'}}>
           <Box><TextField variant='standard'sx={{ input: {fontSize:'2.5rem', textAlign: 'center', color:'white'}, maxWidth: '200px'}} size='small' type='number' color='primary' onChange={e=> setNum(parseInt(e.target.value))} value={num}></TextField></Box>
